@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jyotiDeshmukh1988/namaste-react.git"
+    "url": "git+https://github.com/jyotiDeshmukh1988/namaste-react-webseries.git"
   },
   "author": "Jyoti Deshmukh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jyotiDeshmukh1988/namaste-react/issues"
+    "url": "https://github.com/jyotiDeshmukh1988/namaste-react-webseries/issues"
   },
-  "homepage": "https://github.com/jyotiDeshmukh1988/namaste-react#readme",
+  "homepage": "https://github.com/jyotiDeshmukh1988/namaste-react-webseries#readme",
   "devDependencies": {
     "parcel": "^2.9.3",
     "process": "^0.11.10"

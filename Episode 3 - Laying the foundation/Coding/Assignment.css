@@ -1,0 +1,28 @@
+body{
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    min-height: 30vh;
+    align-items: center;
+    background: #1F164D;
+}
+input.form-control {
+    border-radius: 10px;
+    border: 0px;
+    /* padding: 20px 15px; */
+    width: 60%;
+    height: 40px;
+}
+.logo, .users{
+    flex:1;
+}
+.search{
+    flex:2;
+}
+.fa-user{
+    color:#fff;
+}
