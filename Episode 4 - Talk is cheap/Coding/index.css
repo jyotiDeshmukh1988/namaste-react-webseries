@@ -26,12 +26,12 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.res-card{
-    width:220px;
+.res-card {
+    width: 280px;
     margin: 10px 15px;
 }
 .res-card:hover{
-    border: 2px solid #efefef;
+    border: 1px solid #efefef;
     cursor: pointer;
    
 }
@@ -39,8 +39,10 @@ body{
     padding: 10px;
 }
 img.res-logo {
-    width: 100%;
     box-sizing: border-box;
+    width: 280px;
+    object-fit: cover;
+    height: 180px;
 }
 .body{
     padding: 0px 40px;

@@ -2,7 +2,7 @@
 # Chapter 04 - Talk is Cheap, show me the code
 
 ## Q: Is `JSX` mandatory for React?
-A: `JSX` is an Extension Syntax that allows writing HTML and Javascript together easily in React and is used to create React elements. These elements are then rendered to the React DOM. Each JSX element is just to make use of React easy and for calling React.createElement(component, props, …children) with less work. So, anything that is done with JSX can also be done with just plain JavaScript. So `JSX` is not mandatory but is used for writing better and clean code instead of writing code using `React.CreateElement`.
+A: `JSX` is an Extension Syntax that allows writing HTML and Javascript together easily in React and is used to create React elements. These elements are then rendered to the React DOM. Each JSX element is just to make use of React easy and at end is calling React.createElement(component, props, …children) with less work. So, anything that is done with JSX can also be done with just plain JavaScript. So `JSX` is not mandatory but is used for writing better and clean code instead of writing code using `React.CreateElement`.
 #### Example of `JSX`
 ```
 const sample = <h2>Greetings</h2>;
@@ -83,10 +83,9 @@ Because Fiber is asynchronous, React can:
 - Reuse previously completed work and even abort it if not needed
 - Split work into chunks and prioritize tasks based on importance
 
-
 ## Q: Why do we need `keys` in React?
 A: A `key` is a special attribute you need to include when creating lists of elements in React. Keys are used in React to identify which items in the list are changed, updated, or deleted. In other words, we can say that keys are unique Identifier used to give an identity to the elements in the lists.
-Keys should be given to the elements within the array to give the elements a stable identity.
+Keys should be given to the elements within the array to give the elements a stable identity. So always use the key whenever u used looping with map or forloop
 #### Example
 ```
 <li key={0}>1</li>
@@ -97,26 +96,50 @@ Keys should be given to the elements within the array to give the elements a sta
 
 ## Q: Can we use `index as keys` in React?
 A: Yes, we can use the `index as keys`, but it is not considered as a good practice to use them because if the order of items may change. This can negatively impact performance and may cause issues with component state.
-Keys are taken from each object which is being rendered. There might be a possibility that if we modify the incoming data react may render them in unusual order.
+Keys are taken from each object which is being rendered. 
 
+#### Example
+```
+const todoItems = todos.map((todo, index) =>
+  // Only do this if items have no stable IDs
+  <li key={index}>
+    {todo.text}
+  </li>
+);
+In the example above you can see we are looping through the todos and assigning the index of each item as the the key. This is acceptable for some use cases that we will see below.
+
+Reordering a list, or adding and removing items from a list can cause issues with the component state, when indexes are used as keys. If the key is an index, reordering an item changes it. Hence, the component state can get mixed up and may use the old key for a different component instance.
+
+Therefore, avoid this practice, and make sure unique ids are generated to be assigned as key.
+```
+
+## Q: What are some exceptions where it is safe to use index as key?
+A: If all below exceptions qualify, then you can use an index as a key.
+=> If your list is static and will not change.
+=> The list will never be re-ordered.
+=> The list will not be filtered (adding/removing items from the list).
+=> There are no ids for the items in the list.
+Useful article - https://adhithiravi.medium.com/why-do-i-need-keys-in-react-lists-dbb522188bbb
+
+Note: Using index as a key can lead to potential unexpected behaviour within the component.
 
 ## Q: What is `props in React`? Ways to.
-A: props stands for properties. Props are arguments passed into React components. props are used in React to pass data from one component to another (from a parent component to a child component(s)). They are useful when you want the flow of data in your app to be dynamic.
+A: props stands for properties. Props are arguments passed into React components. props are used in React to pass data from one component to another (from a parent component to a child component(s)). They are useful when you want to send dynamic data. These properties are access via props object.
 #### Example
 ```
 function App() {
   return (
     <div className="App">
-      <Tool name="Chetan Nada" tool="Figma"/> // name and tool are props
+      <Child name="Jyoti Deshmukh" qualification="BE"/> // name and qualification are props
     </div>
   )
 }
 ```
 
 ## Q: What is `Config Driven UI`?
-A: `Config Driven UI` are based on the configurations of the data application receives. It is rather a good practice to use config driven UIs to make application for dynamic. 
-It is a very common & basic approach to interact with the User. It provides a generic interface to develop things which help your project scale well. It saves a lot of development time and effort.
-A typical login form, common in most of the Apps. Most of these forms also get frequent updates as the requirements increase in terms of Form Validations, dropdown options,.. or design changes.
+A: `Config Driven UI` display different UI based on the configurations of the data received from the applications.
+Means UI is driven by the config data you received from the backend server or application.
+It is a good practice to use config driven UIs to make application for dynamic. It provides a generic interface to develop things which help your project scale well. It saves a lot of development time and effort.
 
 
 ## Q: Difference between `Virtual DOM` and `Real DOM`?
