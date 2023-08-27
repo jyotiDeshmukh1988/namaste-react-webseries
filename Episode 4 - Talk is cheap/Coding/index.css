@@ -1,6 +1,7 @@
 body{
     box-sizing: border-box;
     margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
 }
 .header{
     display: flex;
@@ -31,18 +32,31 @@ body{
     margin: 10px 15px;
 }
 .res-card:hover{
-    border: 1px solid #efefef;
+    transform: scale(0.95, 0.95);
+    transform-origin: center center;
+    transition: all 0.1s ease-in 0s;
     cursor: pointer;
    
 }
 .search{
     padding: 10px;
 }
+.filter-btn{
+    border:1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin: 10px 0px 5px 0px;
+}
 img.res-logo {
     box-sizing: border-box;
     width: 280px;
     object-fit: cover;
     height: 180px;
+    border-radius: 20px;
+}
+.res-details {
+    padding: 0px 15px;
 }
 .body{
     padding: 0px 40px;

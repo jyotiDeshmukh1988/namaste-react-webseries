@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import logo from "../Coding/logo.png";
-import foodmeghna from "../Coding/foodmeghna.jpeg";
 
 /**
 ## Project Structure 
