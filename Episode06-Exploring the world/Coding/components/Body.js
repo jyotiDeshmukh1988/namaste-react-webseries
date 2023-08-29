@@ -21,7 +21,7 @@ const Body = () => {
 
   const fetchData = async () => {
     // get restaurant data from your location
-    const data = await fetch({SWIGGY_API_URL});
+    const data = await fetch(SWIGGY_API_URL);
     const json = await data.json();
     //console.log(json);
     //console.log(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
