@@ -1,12 +1,27 @@
-body{
+* {
     box-sizing: border-box;
-    margin: 0 auto;
-    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: PT Sans,Calibri,sans-serif;
+    overflow-x: hidden;
 }
+
+/* global css */
+:root{
+    --header-bg-color: rgb(1, 163, 144);
+    --footer-bg-color: rgb(1, 163, 144);
+    --text-color: #fff;
+    --light-green: #00ad1d;
+    --dark-green: #016034;
+    --orange: #F35636;
+    --light-red: rgb(236, 56, 56);
+}
+
+/* header section css */
 .header{
     display: flex;
     justify-content:space-between;
-    background: #F35636;
+    background: var(--orange);
     align-items: center;
     padding: 0px 40px;
 }
@@ -20,15 +35,50 @@ body{
     padding: 15px;
     list-style-type: none;
     font-size: 24px;
-    color: #fff;
+    color: var(--text-color);
     transition: 10s ease-in-out;
+}
+.loginbtn {
+    border: 1px solid #efefef;
+    cursor: pointer;
+    padding: 0px 30px;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+/* body section css */
+.body{
+    padding: 0px 40px;
+}
+
+/* restaurant card css */
+.res-details svg.svg-inline--fa.fa-star {
+    background: #198E3D;
+    color: var(--text-color);
+    border-radius: 20%;
+    padding: 4px 5px 5px 5px;
+    /* line-height: 15px; */
+    vertical-align: middle;
+}
+img.res-logo {
+    box-sizing: border-box;
+    width: 235px;
+    object-fit: cover;
+    height: 180px;
+    border-radius: 20px;
+}
+.res-details {
+    padding: 0px 15px;
+}
+.res-details p{
+    font-size: 14px;
 }
 .res-container{
     display: flex;
     flex-wrap: wrap;
 }
 .res-card {
-    width: 280px;
+    width: 235px;
     margin: 10px 15px;
 }
 .res-card:hover{
@@ -38,26 +88,87 @@ body{
     cursor: pointer;
    
 }
-.search{
+
+/* Shimmer container css */
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+.shimmer-card{
+    flex-basis: 250px;
     padding: 10px;
+    margin-bottom: 10px;
+    border-color: #d3d5df;
+    box-shadow: 0 4px 7px 0 rgb(218 220 230 / 60%);
 }
-.filter-btn{
-    border:1px solid #ccc;
+.shimmer-title {
+    width: 60%;
+    margin-top: 10px;
+  }
+  .shimmer-tags {
+    width: 80%;
+    margin-top: 4px;
+  }
+  .shimmer-details {
+    width: 100%;
+    margin-top: 18px;
+  }
+  .shimmer-container .shimmer-img {
+    height: 144px;
+    width: 230px;
+  }
+
+/*Animation to Shimmer Component Cards */
+.stroke {
+    height: 15px;
+    background: #777;
+  }
+  .animate {
+    animation: shimmer 3s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(to right, #e6e6e6 5%, #cccccc 25%, #e6e6e6 35%);
+    background-size: 1000px 100%;
+  }
+  @keyframes shimmer {
+    from {
+      background-position: -1000px 0;
+    }
+    to {
+      background-position: 1000px 0;
+    }
+  }
+
+/* filter section css */
+.filter {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+input.search-box {
     padding: 10px 20px;
-    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0px 0px 20px;
+}
+button.search-btn {
+    cursor: pointer;
+    border-radius: 0 20px 20px 0;
+    padding: 15px 20px;
+    background: var(--orange);
+    color: var(--text-color);
+}
+.search {
+    padding: 10px;
+    display: flex;
+}
+.filter-btn {
+    cursor: pointer;
     border-radius: 20px;
-    margin: 10px 0px 5px 0px;
-}
-img.res-logo {
-    box-sizing: border-box;
-    width: 280px;
-    object-fit: cover;
-    height: 180px;
-    border-radius: 20px;
-}
-.res-details {
-    padding: 0px 15px;
-}
-.body{
-    padding: 0px 40px;
+    /* margin: 10px 0 5px; */
+    padding: 12px 20px;
+    font-size: 15px;
+    background: var(--orange);
+    color: var(--text-color);
 }
