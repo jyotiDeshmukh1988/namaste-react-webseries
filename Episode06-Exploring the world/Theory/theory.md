@@ -44,8 +44,9 @@ useEffect accepts `two arguments`, a `callback function` and a `dependency array
 ```
 useEffect(() => {}, [])
 ```
-The `() => {}` is callback function and `[]` is called a empty dependency array. 
-If anything that we pass (suppose currentState) inside the `[]` it trigger the callback function and changes the state of the application.
+The `() => {}` is callback function and `[]` is called a empty dependency array. If we pass an empty dependency array array then useEffect will run on initial render means(only once)
+
+If anything that we pass (suppose currentState) inside the `[]` it trigger the callback function whenever there is change in the currentState.
 ```
 useEffect(() => {
     setCurrentState("true");

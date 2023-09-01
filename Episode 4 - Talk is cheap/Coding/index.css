@@ -15,6 +15,10 @@
     --dark-green: #016034;
     --orange: #F35636;
     --light-red: rgb(236, 56, 56);
+    --light-grey:#ccc;
+    --dark-grey:#999;
+    --light-border:#ccc;
+    --black:#000;
 }
 
 /* header section css */
@@ -37,6 +41,10 @@
     font-size: 24px;
     color: var(--text-color);
     transition: 10s ease-in-out;
+}
+.nav-items ul > li a{
+    color:var(--text-color);
+    text-decoration: none;
 }
 .loginbtn {
     border: 1px solid #efefef;
@@ -76,6 +84,10 @@ img.res-logo {
 .res-container{
     display: flex;
     flex-wrap: wrap;
+}
+.res-container a {
+    color: var(--black);
+    text-decoration: none;
 }
 .res-card {
     width: 235px;
@@ -158,6 +170,7 @@ button.search-btn {
     padding: 15px 20px;
     background: var(--orange);
     color: var(--text-color);
+    border:0px;
 }
 .search {
     padding: 10px;
@@ -166,9 +179,90 @@ button.search-btn {
 .filter-btn {
     cursor: pointer;
     border-radius: 20px;
-    /* margin: 10px 0 5px; */
-    padding: 12px 20px;
+    padding: 15px 30px;
     font-size: 15px;
     background: var(--orange);
+    color: var(--text-color);
+    border: 0px;
+}
+
+/* Menu item css */
+.menuContainer {
+    width: 980px;
+    margin: 20px auto;
+}
+.resDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.ratings {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+.rateViews{
+    color: var(--dark-green);
+    font-weight: 600;
+}
+.deliveryDetails {
+    align-items: center;
+    gap: 20px;
+    height: 50px;
+    display: flex;
+    font-weight: 600;
+    font-size: 16px;
+}
+.couponDetails {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.offer {
+    border: 1px solid var(--light-grey);
+    padding: 10px;
+    border-radius: 5px;
+}
+.menuGrid{
+    display: block;
+    margin: 20px 0px;
+}
+.menuItemCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 250px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--light-grey);
+    margin-top: 20px;
+}
+.menuName {
+    flex: 2;
+}
+.menuPrice {
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+.menu-desc {
+    font-size: 14px;
+    color:var(--dark-grey);
+}
+
+/* Footer css */
+#footer {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    display: flex;
+    background: var(--orange);
+    box-shadow: 5px 5px 30px -1px #999;
+    margin-top: 20px;
     color: var(--text-color);
 }
