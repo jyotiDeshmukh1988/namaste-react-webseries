@@ -152,6 +152,12 @@ img.res-logo {
     }
   }
 
+/* main container css */
+.maincontainer {
+    width: 980px;
+    margin: 20px auto;
+}
+
 /* filter section css */
 .filter {
     align-items: center;
