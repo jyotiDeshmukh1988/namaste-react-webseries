@@ -96,7 +96,7 @@ The main difference between super() and super(props) is the `this`.props is unde
 A: `useEffect` expects it's callback function to return nothing or return a function (cleanup function that is called when the component is unmounted). If we make the callback function as `async`
 
 When you use an async function like
-``
+``````
 async () => {
     try {
         const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
@@ -106,11 +106,11 @@ async () => {
         console.error(e);
     }
 }
-``
+``````
 it returns a promise and `useEffect` doesn't expect the callback function to return Promise, rather it expects that nothing is returned or a function is returned.
 
 As a workaround for the warning you can use a `self invoking async function`.
-``
+``````
 useEffect(() => {
     (async function() {
         try {
@@ -124,9 +124,9 @@ useEffect(() => {
         }
     })();
 }, []);
-``
+``````
 or to make it more cleaner you could `define a function and then call it`
-``
+``````
 useEffect(() => {
     async function fetchData() {
         try {
@@ -141,6 +141,6 @@ useEffect(() => {
     };
     fetchData();
 }, []);
-``
+``````
 
 # References - https://stackoverflow.com/questions/53332321/react-hook-warnings-for-async-function-in-useeffect-useeffect-function-must-ret
