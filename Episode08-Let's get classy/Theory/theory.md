@@ -87,9 +87,60 @@ For example, in Repo class, during `componentDidMount()` a timer is set with an 
 
 ## Q: (Research) Why do we use `super(props)` in constructor?
 A: `super(props)` is used to inherit the properties and access of variables of the React parent class when we initialize our component.
-super() is used inside constructor of a class to derive the parent's all properties inside the class that extended it. If super() is not used, then Reference Error : Must call super constructor in derived classes before accessing 'this' or returning from derived constructor is thrown in the console.
-The main difference between super() and super(props) is the this.props is undefined in child's constructor in super() but this.props contains the passed props if super(props) is used.
+super() is used inside constructor of a class to derive the parent's all properties inside the class that extended it. If super() is not used, then `Reference Error : Must call super constructor in derived classes before accessing 'this' or returning from derived constructor` error is thrown in the console.
+
+The main difference between super() and super(props) is the `this`.props is undefined in child's constructor in super() but this.props contains the passed props if super(props) is used then you can able to access `this.props` inside the child constructor.
 
 
 ## Q: (Research) Why can't we have the `callback function` of `useEffect async`?
-A: `useEffect` expects it's callback function to return nothing or return a function (cleanup function that is called when the component is unmounted). If we make the callback function as `async`, it will return a `promise` and the promise will affect the clean-up function from being called.
+A: `useEffect` expects it's callback function to return nothing or return a function (cleanup function that is called when the component is unmounted). If we make the callback function as `async`
+
+When you use an async function like
+``
+async () => {
+    try {
+        const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
+        const json = await response.json();
+        setPosts(json.data.children.map(it => it.data));
+    } catch (e) {
+        console.error(e);
+    }
+}
+``
+it returns a promise and `useEffect` doesn't expect the callback function to return Promise, rather it expects that nothing is returned or a function is returned.
+
+As a workaround for the warning you can use a `self invoking async function`.
+``
+useEffect(() => {
+    (async function() {
+        try {
+            const response = await fetch(
+                `https://www.reddit.com/r/${subreddit}.json`
+            );
+            const json = await response.json();
+            setPosts(json.data.children.map(it => it.data));
+        } catch (e) {
+            console.error(e);
+        }
+    })();
+}, []);
+``
+or to make it more cleaner you could `define a function and then call it`
+``
+useEffect(() => {
+    async function fetchData() {
+        try {
+            const response = await fetch(
+                `https://www.reddit.com/r/${subreddit}.json`
+            );
+            const json = await response.json();
+            setPosts(json.data.children.map(it => it.data));
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    fetchData();
+}, []);
+``
+
+# References - https://stackoverflow.com/questions/53332321/react-hook-warnings-for-async-function-in-useeffect-useeffect-function-must-ret
