@@ -235,6 +235,14 @@ button.search-btn {
     border: 1px solid var(--light-grey);
     padding: 10px;
     border-radius: 5px;
+    width: 25%;
+}
+.offer h4{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 160px;
+    height: 1.2em;
+    white-space: nowrap;
 }
 .menuGrid{
     display: block;
