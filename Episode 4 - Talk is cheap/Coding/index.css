@@ -31,6 +31,8 @@
 }
 .nav-items > ul{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .logo{
     width:130px;
@@ -47,13 +49,40 @@
     text-decoration: none;
 }
 .loginbtn {
-    border: 1px solid #efefef;
     cursor: pointer;
-    padding: 0px 30px;
-    font-size: 18px;
+    border: 0px;
     border-radius: 20px;
+    padding: 6px 30px;
+    font-size: 26px;
+    line-height: 1.6em;
+    background: unset;
+    color: #fff;
 }
-
+/* error css */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+h3.error-data {
+    color: #FF735C;
+}
+h3.error-back-home {
+    border: 1px solid #FF735C;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #FF735C;
+    cursor: pointer;
+}
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 /* body section css */
 .body{
     padding: 0px 40px;
@@ -80,10 +109,20 @@ img.res-logo {
 }
 .res-details p{
     font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.res-details h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* font-size: 14px; */
+    overflow: hidden;
 }
 .res-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .res-container a {
     color: var(--black);
@@ -100,7 +139,51 @@ img.res-logo {
     cursor: pointer;
    
 }
-
+/* Login Component css*/
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loginForm {
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 500px;
+    background: antiquewhite;
+}
+.headerTitle {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.submitbtn {
+    border: 0px;
+    padding: 12px 15px;
+    margin-top: 15px;
+    background: #d2ac7e;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.loginForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* width: 100%; */
+}
+input[type="text"],input[type="password"],input[type="email"] {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.logo-container {
+    margin: 10px 0px;
+}
+label {
+    font-size: 20px;
+    margin: 12px 0px 7px 0px;
+}
 /* Shimmer container css */
 .shimmer-container{
     display: flex;
