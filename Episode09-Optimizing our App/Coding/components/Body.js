@@ -5,13 +5,14 @@ import Shimmer from "./Shimmer"; // this is default export
 import { SWIGGY_API_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
+import Carousel from "./Carousel";
 
 const Body = () => {
   // Local state variable - Super powerful variable
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const [whatNew, setwhatNew] = useState([]);
   // Whenver state variable update, react triggers a reconciliation cycle(re-renders the component);
   //console.log("Body rendered");
 
@@ -28,17 +29,17 @@ const Body = () => {
       const json = await data.json();
       // optional chaining
       setlistofRestaurants(
-        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setFilteredList(
-        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
+      setwhatNew(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info)
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       setlistofRestaurants([]);
       setFilteredList([]);
+      setwhatNew([]);
     }
   };
 
@@ -53,6 +54,9 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
+      <div className="res-container">
+        <Carousel newItem={whatNew}/>
+      </div>
       <div className="filter">
         <div className="search">
           <input

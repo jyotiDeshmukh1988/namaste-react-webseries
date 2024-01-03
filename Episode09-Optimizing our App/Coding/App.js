@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
+import Login from "./components/Login";
 //import Grocery from "./components/Grocery"; // will load this component using lazy function
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -29,6 +30,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -55,7 +57,10 @@ const appRouter = createBrowserRouter([
         element: <RestaurantMenu />,
       },
     ],
-    errorElement: <Error />,
+  },
+  {
+    path:"/login",
+    element:<Login/>,
   },
 ]);
 

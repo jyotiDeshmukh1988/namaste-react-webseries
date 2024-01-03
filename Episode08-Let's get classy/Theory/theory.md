@@ -144,3 +144,18 @@ useEffect(() => {
 ``````
 
 # References - https://stackoverflow.com/questions/53332321/react-hook-warnings-for-async-function-in-useeffect-useeffect-function-must-ret
+
+## Q: What is the difference between `class component` and `functional component`?
+A: class component contain render method which return a JSX but function component contain return method which return the JSX.
+class component return a class and a function component return a function.
+
+## Q: `Class components` receive props how?
+A: `class components` receive props via constructor method passing props as arguments
+
+```````
+constructor(props) {
+    super(props);
+    console.log("Constructor called");
+}
+
+```````

@@ -1,25 +1,26 @@
 import UserClass from "../components/UserClass";
 import { Component } from "react";
+import User from "./User";
 
 class About extends Component {
   constructor(props) {
     super(props);
-    //console.log("Parent constructor");
+    console.log("Parent constructor");
   }
 
   async componentDidMount() {
     // use for API call becoz it is called after the component is mounted
-    // console.log("Parent Component Did Mount");
+    console.log("Parent Component Did Mount");
   }
 
   render() {
-    //console.log(this.state.userInfo);
-
+    console.log("Parent render method");
     return (
       <>
         <h1>Want to know more about me</h1>
         <h2>Please see the details below</h2>
         <UserClass name={"First Child"} location={"Pune"} />
+        {/*<User/>*/}
       </>
     );
   }

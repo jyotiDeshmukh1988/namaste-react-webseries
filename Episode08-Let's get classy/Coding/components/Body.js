@@ -1,15 +1,16 @@
 import RestaurantCard from "./RestaurantCard"; // you rename the default directly without using "as" alias for eg: import RestCard from "./RestaurantCard";
-import { resList as ResList } from "../utils/mockData"; // you rename the named export using "as" alias
 import { useEffect, useState } from "react"; // this is named export
 import Shimmer from "./Shimmer"; // this is default export
 import { SWIGGY_API_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import Carousel from "./Carousel";
 
 const Body = () => {
   // Local state variable - Super powerful variable
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [whatNew, setwhatNew] = useState([]);
 
   // Whenver state variable update, react triggers a reconciliation cycle(re-renders the component);
   //console.log("Body rendered");
@@ -25,34 +26,32 @@ const Body = () => {
       // get restaurant data from your location
       const data = await fetch(SWIGGY_API_URL);
       const json = await data.json();
-      console.log(json);
+     // console.log(json);
       //console.log(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
       // optional chaining
       setlistofRestaurants(
-        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setFilteredList(
-        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
+      setwhatNew(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info)
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       setlistofRestaurants([]);
       setFilteredList([]);
+      setwhatNew([]);
     }
   };
-
-  // conditional rendering
-  /*if(listofRestaurants.length === 0) {
-    return <Shimmer/>;
-  }*/
-
+  
   // ternary operator rendering
   return listofRestaurants && listofRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
+      <div className="res-container">
+        <Carousel newItem={whatNew}/>
+      </div>
       <div className="filter">
         <div className="search">
           <input
@@ -100,6 +99,7 @@ const Body = () => {
           <i className="fa-solid fa-star"></i> Top Rated Restaurants
         </button>
       </div>
+      
       <div className="res-container">
         {filteredList.map((restaurant) => (
           <Link to={"/restaurant/" + restaurant?.info?.id} key={restaurant?.info?.id}>

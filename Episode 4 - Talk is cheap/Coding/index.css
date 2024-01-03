@@ -123,6 +123,8 @@ img.res-logo {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    overflow-x: hidden;
+    margin: 0 auto;
 }
 .res-container a {
     color: var(--black);
@@ -351,7 +353,43 @@ button.search-btn {
     font-size: 14px;
     color:var(--dark-grey);
 }
-
+/* carousel css start */
+  .controls {
+    display: flex;
+    justify-content: end;
+    width:100%;
+    flex:1;
+  }
+.controls button {
+    color: #000;
+    cursor: pointer;
+    background-color: rgb(226, 226, 231);
+    border: 0;
+    width: 40px;
+    height: 40px;
+    transition: background-color .5s ease-out;
+    border-radius: 100%;
+    padding: 8px 8px 4px;
+}
+  
+  .controls button:hover {
+    background-color: #c1c1c6;
+  }
+  
+  .controls button:nth-child(1) {
+    margin-right: 0.5rem;
+  }
+  .mainContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+.mainContent .heading{
+    flex: 1;
+}
+/* carousel css end */
 /* Footer css */
 #footer {
     justify-content: center;

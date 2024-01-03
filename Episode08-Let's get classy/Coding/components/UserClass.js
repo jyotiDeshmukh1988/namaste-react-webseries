@@ -6,46 +6,54 @@ import { GITHUB_USER_API } from "../utils/constants";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log("Constructor called");
+    //console.log(props);
+    console.log("Child Constructor called");
     // declare state variable all state variables defined here
     this.state = {
-      userInfo:{
-        name:"Jyoti",
-        location:"MP",
-        company:"Freelancer",
-        bio:"Web developer"
-      }
+      userInfo: {
+        name: "Jyoti",
+        location: "MP",
+        company: "Freelancer",
+        bio: "Web developer",
+      },
+    };
+  }
+
+  async componentDidMount() {
+    // better place to call the api after component is mounted or rendered is completed
+    console.log("child componentDidMount called");
+    // github API call
+   /* this.mytime = setInterval(() => {
+      console.log("reading user namaste react..."); 
+    },1000);*/
+
+    try {
+      const data = await fetch(GITHUB_USER_API);
+      const json = await data.json();
+      //console.log(json);
+      this.setState({
+        userInfo: json,
+      });
+      //console.log(json);
+    } 
+    catch (err) {
+      console.log(err);
+      this.state.userInfo = {};
     }
   }
 
-  async componentDidMount() { // better place to call the api after component is mounted or rendered is completed
-    console.log("componentDidMount called");
-    // github API call
-    try{
-      const data = await fetch(GITHUB_USER_API);
-      const json = await data.json();
-     this.setState({
-       userInfo:json
-     })
-      //console.log(json);
-      }
-      catch(err){
-       console.log(err);
-       this.state.userInfo={};
-      }
+  componentDidUpdate() {
+    console.log("child componentDidUpdate called");
   }
 
-  componentDidUpdate(){
-    console.log("componentDidUpdate called");
-  }
-
-  componentWillUnmount(){
-    console.log("componentWillUnmount called"); 
+  componentWillUnmount() {
+    console.log("child componentWillUnmount called");
+    /*clearInterval(this.mytime);*/
   }
 
   render() {
-    console.log("render() called");
-    const {name,location,company,bio} = this.state.userInfo;
+    console.log("child render() called");
+    const { name, location, company, bio } = this.state.userInfo;
     return (
       <div className="user-card">
         <h1>Profile: {name}</h1>
