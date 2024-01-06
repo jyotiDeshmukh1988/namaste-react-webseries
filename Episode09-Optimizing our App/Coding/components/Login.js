@@ -15,11 +15,10 @@ const Login = () => {
           .required("Required"),
       })}
       onSubmit={(values,{resetForm}) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values));
+          localStorage.setItem("loginData", JSON.stringify(values));
+          //alert(JSON.stringify(values));
           resetForm({values:""});
           navigate("/");
-        }, 400);
       }}
     >
       {(formik) => (

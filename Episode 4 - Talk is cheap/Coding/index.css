@@ -25,9 +25,12 @@
 .header{
     display: flex;
     justify-content:space-between;
-    background: var(--orange);
+    box-shadow: 2px 2px 20px -5px #999;
     align-items: center;
     padding: 0px 40px;
+    position: fixed;
+    width: 100vw;
+    z-index: 999;
 }
 .nav-items > ul{
     display: flex;
@@ -41,11 +44,8 @@
     padding: 15px;
     list-style-type: none;
     font-size: 24px;
-    color: var(--text-color);
-    transition: 10s ease-in-out;
 }
 .nav-items ul > li a{
-    color:var(--text-color);
     text-decoration: none;
 }
 .loginbtn {
@@ -56,7 +56,6 @@
     font-size: 26px;
     line-height: 1.6em;
     background: unset;
-    color: #fff;
 }
 /* error css */
 .error-page {
@@ -182,6 +181,12 @@ input[type="text"],input[type="password"],input[type="email"] {
 .logo-container {
     margin: 10px 0px;
 }
+.logo-container a{
+    font-size: 30px;
+    text-decoration: none;
+    font-family: cursive;
+    font-weight: 700;
+}
 label {
     font-size: 20px;
     margin: 12px 0px 7px 0px;
@@ -240,7 +245,10 @@ label {
 /* main container css */
 .maincontainer {
     width: 980px;
-    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+    margin: 120px auto 20px;
+    display: flex;
 }
 
 /* filter section css */
@@ -396,8 +404,19 @@ button.search-btn {
     align-items: center;
     padding: 20px;
     display: flex;
-    background: var(--orange);
     box-shadow: 5px 5px 30px -1px #999;
     margin-top: 20px;
-    color: var(--text-color);
+}
+.dark-layout, .dark-layout a, .dark-layout .loginbtn, .dark-layout .header {
+    background: #000;
+    color: #fff;
+}
+.light-layout, .light-layout a, .light-layout .loginbtn, .light-layout .header {
+    background: #fff;
+    color: #000;
+}
+.switchbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

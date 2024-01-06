@@ -30,10 +30,10 @@ const Body = () => {
       //console.log(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
       // optional chaining
       setlistofRestaurants(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setFilteredList(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setwhatNew(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info)
     } catch (e) {

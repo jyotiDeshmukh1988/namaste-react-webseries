@@ -3,9 +3,9 @@ const WhatonMind = (props) => {
    // console.log(props);
     const {mindItem} = props;
     const{imageId} = mindItem;
-    return <div className="whatnew-container">
+    return <>
         <img src={CDN_URL+imageId} width="144" height="180"/>
-    </div>
+    </>
 }
 
 export default WhatonMind;

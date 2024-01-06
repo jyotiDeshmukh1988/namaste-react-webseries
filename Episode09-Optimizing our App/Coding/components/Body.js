@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer"; // this is default export
 import { SWIGGY_API_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
+import {useDarkMode} from "../hooks/useDarkMode.js";
 import Carousel from "./Carousel";
 
 const Body = () => {
@@ -13,6 +14,7 @@ const Body = () => {
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [whatNew, setwhatNew] = useState([]);
+  
   // Whenver state variable update, react triggers a reconciliation cycle(re-renders the component);
   //console.log("Body rendered");
 
@@ -27,14 +29,15 @@ const Body = () => {
       // get restaurant data from your location
       const data = await fetch(SWIGGY_API_URL);
       const json = await data.json();
+      console.log(json);
       // optional chaining
       setlistofRestaurants(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setFilteredList(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
-      setwhatNew(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info)
+      setwhatNew(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.info)
     } catch (e) {
       //console.log(e);
       setlistofRestaurants([]);
