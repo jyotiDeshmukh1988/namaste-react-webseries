@@ -19,7 +19,9 @@
   "homepage": "https://github.com/jyotiDeshmukh1988/namaste-react-webseries#readme",
   "devDependencies": {
     "parcel": "^2.9.3",
-    "process": "^0.11.10"
+    "postcss": "^8.4.33",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
   },
   "dependencies": {
     "formik": "^2.4.5",
