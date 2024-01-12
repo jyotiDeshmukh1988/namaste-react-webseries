@@ -1,5 +1,5 @@
 ## Namaste React Course by Akshay Saini
-# Chapter 09 - Optimizing our application
+# Chapter 10 - Design our application using CSS libraries
 
 ## Q: Explore all the ways of writing CSS ?
 A: 

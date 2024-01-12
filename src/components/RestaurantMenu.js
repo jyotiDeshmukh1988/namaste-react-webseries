@@ -3,15 +3,23 @@ import {
   RESTAURANT_TYPE_KEY,
   GRIDWIDGET_TYPE_KEY,
   MENU_ITEM_URL,
+  CATEGORY_TYPE_KEY,
 } from "../utils/constants";
-import {CardShimmer} from "./Shimmer";
+import { CardShimmer } from "./Shimmer";
 import useRestaurantMenu from "../hooks/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   //const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
   const { resId } = useParams();
   const restaurant = useRestaurantMenu(resId);
-
+  const [showIndex, setShowIndex] = useState(null);
+  const handleClick = (myindex) => {
+    console.log(myindex);
+    console.log(showIndex);
+    setShowIndex(showIndex == myindex ? null : myindex);
+  }
   // Set restaurant data
   const restaurantData =
     restaurant?.data?.cards
@@ -22,6 +30,7 @@ const RestaurantMenu = () => {
     null;
   //console.log(restaurantData);
   const {
+    id,
     name,
     cuisines,
     avgRating,
@@ -45,12 +54,14 @@ const RestaurantMenu = () => {
 
   offersHTML = offersData.map((offer, ind) => {
     const {
-      info: { couponCode, description, header,offerTagColor },
+      info: { couponCode, description, header, offerTagColor },
     } = offer;
     //console.log(couponCode, description, header);
     return (
       <div className="offer py-2 px-5 rounded-md border-2" key={ind}>
-        <h4 style={{color:offerTagColor}} className="text-center">{header}</h4>
+        <h4 style={{ color: offerTagColor }} className="text-center">
+          {header}
+        </h4>
         <h6>
           {couponCode} | {description}{" "}
         </h6>
@@ -64,43 +75,19 @@ const RestaurantMenu = () => {
       ?.cardGroupMap?.REGULAR?.cards || [];
   //console.log(menuData);
 
-  // menu items
-  const cardItems = menuData[2]?.card?.card?.itemCards;
-  let menuHTML;
-  //console.log(cardItems);
-  if (cardItems && cardItems.length > 0) {
-    menuHTML = cardItems.map((menu, ind) => {
-      //  console.log(menu);
-      const { card } = menu;
-      const {
-        info: { defaultPrice, description, name, imageId, price },
-      } = card;
-      return (
-        <div className="menuItemCard flex justify-between gap-4 mb-3 border-dashed border-t-2 pt-2" key={ind}>
-          <div className="menuName flex flex-col">
-            <h4 className="menuName font-semibold">{name}</h4>
-            <h5 className="menuPrice">
-              <i className="fa fa-inr"></i> {defaultPrice / 100 || price / 100}
-            </h5>
-            <p className="menu-desc">{description}</p>
-          </div>
-          <div className="menuImage">
-            {imageId && <img src={MENU_ITEM_URL + imageId} alt={name} className="rounded-lg"/>}
-          </div>
-        </div>
-      );
-    });
-  } else {
-    menuHTML = <CardShimmer />;
-  }
-  return restaurant === null ? (
+  const categories = menuData
+    .map((x) => x.card.card)
+    ?.filter((x) => x["@type"] === CATEGORY_TYPE_KEY);
+  // console.log(categories);
+
+  return restaurant === 0 ? (
     <CardShimmer />
   ) : (
-    <div className="menuContainer">
+    <div className="menuContainer pt-16">
       {restaurantData && (
         <div className="resDetails flex justify-between mb-5 mt-7">
           <div className="resName">
-            <h1 className="text-xl">{name}</h1>
+            <h1 className="text-2xl font-semibold">{name}</h1>
             <p>{cuisines.join(", ")}</p>
           </div>
           <div className="ratings flex flex-col items-center rounded-sm">
@@ -112,16 +99,36 @@ const RestaurantMenu = () => {
       <hr />
       {restaurantData && (
         <div className="deliveryDetails flex gap-5 mt-5 mb-2">
-          <span className="time font-semibold text-xl">
+          <span className="time font-semibold text-base">
             <i className="fa-solid fa-clock"></i> {sla.deliveryTime}
           </span>
-          <span className="cost font-semibold text-xl">
+          <span className="cost font-semibold text-base">
             {costForTwoMessage}
           </span>
         </div>
       )}
-      {offersData && <div className="couponDetails flex justify-between mt-5 mb-5">{offersHTML}</div>}
-      {menuData && <div className="menuGrid">{menuHTML}</div>}
+      {offersData && (
+        <div className="couponDetails flex justify-between mt-5 mb-5">
+          {offersHTML}
+        </div>
+      )}
+      {/*menuData && <div className="menuGrid">{menuHTML}</div>*/}
+      {/* categories accordian */}
+      {categories.map((category, index) => {
+        //console.log(category);
+        return (
+          // controlled component becoz its state is controlled by its parent that is Restaurant menu
+          <RestaurantCategory
+            data={category}
+            key={category.title}
+            showItems={
+              index == showIndex ? true : false
+            }
+            displayItems={()=>handleClick(index)}
+            //setShowIndex={()=>setShowIndex(showIndex === index ? null : index)}
+          />
+        );
+      })}
     </div>
   );
 };

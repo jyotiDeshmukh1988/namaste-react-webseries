@@ -17,10 +17,12 @@ class About extends Component {
     console.log("Parent render method");
     return (
       <>
+      <div className="container pt-24 mx-auto">
         <h1>Want to know more about me</h1>
         <h2>Please see the details below</h2>
         <UserClass name={"First Child"} location={"Pune"} />
         {/*<User/>*/}
+        </div>
       </>
     );
   }

@@ -24,4 +24,20 @@ const RestaurantCard = (props) => {
   );
 };
 
+// Higher Order Component
+
+// Input - RestaurantCard => Output (RestaurantCardVeg)
+
+export const withFiveStarLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <>
+        <label className="absolute bg-green-800 text-white p-1 text-xs">Bestseller</label>
+        <RestaurantCard {...props}/>
+      </>
+    )
+  }
+
+}
+
 export default RestaurantCard;

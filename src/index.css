@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.dark-layout{
+.dark-layout, .dark-layout .header{
     background-color: #000;
     color:#fff;
 }
-.light-layout{
+.light-layout, .light-layout .header{
     background-color: #fff;
     color:#000;
 }

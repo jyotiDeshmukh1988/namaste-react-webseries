@@ -8,7 +8,7 @@ export const shimmer_card_unit = 20;
 export const GRIDWIDGET_TYPE_KEY = "type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget";
 export const RESTAURANT_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.Restaurant";
 export const OFFERS_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.OfferInfoWithStyle";
-
+export const CATEGORY_TYPE_KEY = "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory";
 // github user api 
 export const GITHUB_USER_API = "https://api.github.com/users/jyotiDeshmukh1988";
 

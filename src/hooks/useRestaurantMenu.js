@@ -13,7 +13,7 @@ const useRestaurantMenu = (resId) => {
       const data = await fetch(SWIGGY_MENU_URL + resId);
       const json = await data.json();
       //console.log("my test result");
-      console.log(json);
+      //console.log(json);
       setResInfo(json);
       // Set restaurant data
     } catch (err) {
