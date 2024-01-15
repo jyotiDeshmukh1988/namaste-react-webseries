@@ -11,16 +11,21 @@ import RestaurantMenu from "./src/components/RestaurantMenu";
 import Shimmer from "./src/components/Shimmer";
 import Login from "./src/components/Login";
 //import Grocery from "./components/Grocery"; // will load this component using lazy function
+import { Provider } from "react-redux"; // required to connect to the redux toolkit
+import appStore from "./src/utils/appStore";
+import Cart from "./src/components/Cart";
 
 const Grocery = lazy(() => import("./src/components/Grocery"));
 
 const AppLayout = () => {
   return (
+    <Provider store={appStore}>
     <div className="main-container">
       <Header />
       <div className="container mt-10 mx-auto p-10"><Outlet /></div>
       <Footer />
     </div>
+    </Provider>
   );
 };
 
@@ -41,6 +46,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },
       {
         path: "/grocery",

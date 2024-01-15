@@ -16,8 +16,8 @@ const RestaurantMenu = () => {
   const restaurant = useRestaurantMenu(resId);
   const [showIndex, setShowIndex] = useState(null);
   const handleClick = (myindex) => {
-    console.log(myindex);
-    console.log(showIndex);
+  //  console.log(myindex);
+   // console.log(showIndex);
     setShowIndex(showIndex == myindex ? null : myindex);
   }
   // Set restaurant data

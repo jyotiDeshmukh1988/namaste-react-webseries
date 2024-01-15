@@ -30,7 +30,7 @@ const Body = () => {
       // get restaurant data from your location
       const data = await fetch(SWIGGY_API_URL);
       const json = await data.json();
-      console.log(json);
+      //console.log(json);
       //console.log(listofRestaurants);
       // optional chaining
       setlistofRestaurants(

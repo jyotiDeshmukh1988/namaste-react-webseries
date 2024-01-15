@@ -1,21 +1,20 @@
-import { useDispatch,useSelector } from "react-redux";
-import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 import { MENU_ITEM_URL } from "../utils/constants";
-const ItemList = ({ items }) => {
-  const dispatch = useDispatch();
-  
-  const handleAddItem = (item) => {
-    // dispatch an action
-    dispatch(addItem(item));
-  };
-
+import { FaTrashCan } from "react-icons/fa6";
+import { removeItem } from "../utils/cartSlice";
+const CartItemList = ({ items }) => {
   return items.map((item) => {
     //console.log(item);
+    const dispatch = useDispatch();
     const singleitem = item?.card?.info;
+    const handlerRemoveItem = (itemId) => {
+		console.log('removed clicked')
+		dispatch(removeItem(itemId))
+	}
     return (
       <div
         key={singleitem.id}
-        className="flex flex-wrap justify-between mt-2 pb-5 mb-2 border-b-2"
+        className="flex flex-wrap justify-between mt-2 pb-5 mb-2 border-b-2 items-center"
       >
         <div className="text-bold w-4/6">
           <p>
@@ -51,25 +50,16 @@ const ItemList = ({ items }) => {
         </div>
         <div className="">
           {singleitem.imageId && (
-            <div className="absolute">
-              <button
-                className="px-5 py-2 rounded-r-lg mx-auto bg-black text-white shadow-lg m-auto"
-                onClick={() => handleAddItem(item)}
-              >
-                Add +
-              </button>
-            </div>
-          )}
-          {singleitem.imageId && (
             <img
               src={MENU_ITEM_URL + singleitem.imageId}
-              className="rounded-lg"
+              className="rounded-lg" width="100"
             />
           )}
         </div>
+        <div className="" onClick={()=>handlerRemoveItem(singleitem.id)}><FaTrashCan /></div>
       </div>
     );
   });
 };
 
-export default ItemList;
+export default CartItemList;
