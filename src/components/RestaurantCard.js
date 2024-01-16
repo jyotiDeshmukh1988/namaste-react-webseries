@@ -8,16 +8,16 @@ const RestaurantCard = (props) => {
     <div className="res-card">
       <div className="menu-image">
         <img
-          className="object-cover h-48 w-96"
+          className="object-cover h-48 w-96 rounded-lg"
           src={CDN_URL + cloudinaryImageId}
           alt="res-logo"
         />
       </div>
-      <div className="res-details mt-1">
+      <div className="res-details mt-2">
         <h3 className="text-xl font-semibold">{name}</h3>
-        <span><i className="fa-solid fa-star"></i> {avgRating} stars</span>
-        <p>{cuisines.join(", ")}</p>
-        {/*<h4>{costForTwo}</h4>
+        <span><i className="fa-solid fa-star" style={{color:"green"}}></i> {avgRating} stars - {sla.deliveryTime} mins</span>
+        {/*<p>{cuisines.join(", ")}</p>
+        <h4>{costForTwo}</h4>
         <h4>{sla.slaString}</h4>*/}
       </div>
     </div>

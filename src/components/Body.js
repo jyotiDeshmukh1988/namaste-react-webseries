@@ -11,7 +11,11 @@ const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [topRestaurant, settopRestaurant] = useState([]);
   const [whatNew, setwhatNew] = useState([]);
+  const [isPureVegActive, setPureVegIsActive] = useState(false);
+  const [isFastActive, setIsFastActive] = useState(false);
+  const [isRatingActive, setIsRatingActive] = useState(false);
 
   // Higher order component
   const RestaurantCardOnlyFiveStar = withFiveStarLabel(RestaurantCard);
@@ -30,24 +34,28 @@ const Body = () => {
       // get restaurant data from your location
       const data = await fetch(SWIGGY_API_URL);
       const json = await data.json();
-      //console.log(json);
-      //console.log(listofRestaurants);
+      console.log(json);
       // optional chaining
       setlistofRestaurants(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilteredList(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
+      );
+      settopRestaurant(
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       );
       setwhatNew(
         json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info
       );
+      console.log(listofRestaurants);
     } catch (e) {
       //console.log(e);
       setlistofRestaurants([]);
       setFilteredList([]);
+      settopRestaurant([]);
       setwhatNew([]);
     }
   };
@@ -70,22 +78,17 @@ const Body = () => {
       <div className="flex-col flex pt-16">
        {whatNew && <Carousel newItem={whatNew} />}
       </div>
-      <div className="filter flex items-center justify-center my-8">
-        <div className="w-1/3 flex">
+      {/*<div className="flex-col flex pt-16">
+       {topRestaurant && <Carousel newItem={topRestaurant} />}
+  </div>*/}
+      <div className="filter flex items-center justify-center my-8 gap-4">
+        <div className="w-1/3">
           <input
             type="text"
-            className="search-box block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 shadow-sm sm:text-sm"
+            className="search-box block bg-white w-full border border-slate-300 rounded-full py-2 pl-2 shadow-sm sm:text-sm"
             value={searchText}
             placeholder="Search ..."
             onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            className="search-btn border-slate-300 rounded-md border py-2 px-5 bg-neutral-500 text-white"
-            onClick={() => {
-              // filter the restaurant cards and update the UI
-              // get the searchText
               const filtersearchlist = listofRestaurants.filter(
                 (item, index) => {
                   //return searchText.indexOf(item);
@@ -95,28 +98,76 @@ const Body = () => {
                     .includes(searchText.toLowerCase());
                 }
               );
-              console.log(filtersearchlist);
+             // console.log(filtersearchlist);
+             if(e.target.value === ''){
+              setFilteredList(listofRestaurants);
+             }
+             else{
               setFilteredList(filtersearchlist);
+             }
+             setSearchText(e.target.value);
+            }}
+          />
+        </div>
+        <div className="text-center">
+          <button
+            className={`filter-btn ml-5 font-bold border border-slate-300 rounded-full py-2 px-3 ${isPureVegActive ? 'bg-gray-300' : 'bg-transparent'}`}
+            onClick={(e) => {
+              //console.log("button clicked");
+              const filterlist = listofRestaurants.filter((restaurant) => {
+               // console.log(restaurant);
+               const { veg } = restaurant.info;
+                return veg === true;
+              });
+              //console.log(filterlist);
+              setFilteredList(filterlist);
+              setPureVegIsActive(current => !current);
+              setIsFastActive(false);
+              setIsFastActive(false);
             }}
           >
-            Search
+            <i className="fa-solid fa-leaf" style={{color:"green"}}></i> Pure Veg
           </button>
         </div>
-        <div className="w-1/3">
+        <div className="text-center">
           <button
-            className="filter-btn ml-5"
+            className={`filter-btn ml-5 font-bold border border-slate-300 rounded-full py-2 px-3 ${isFastActive ? 'bg-gray-300' : 'bg-transparent'}`}
             onClick={() => {
-              console.log("button clicked");
+              //console.log("button clicked");
+              const filterlist = listofRestaurants.filter((restaurant) => {
+               // console.log(restaurant);
+               const {deliveryTime} = restaurant?.info?.sla;
+                return deliveryTime < 25;
+                
+              });
+              //console.log(filterlist);
+              setFilteredList(filterlist);
+              setIsFastActive(current => !current);
+              setIsRatingActive(false);
+              setPureVegIsActive(false);
+            }}
+          >
+            <i className="fas fa-shipping-fast"></i> Fast Delivery
+          </button>
+        </div>
+        <div className="">
+          <button
+            className={`filter-btn ml-5 font-bold border border-slate-300 rounded-full py-2 px-3 ${isRatingActive ? 'bg-gray-300' : 'bg-transparent'}`}
+            onClick={() => {
+              //console.log("button clicked");
               const filterlist = listofRestaurants.filter((restaurant) => {
                 //console.log(restaurant);
                 const { avgRating } = restaurant.info;
-                return avgRating > 4;
+                return avgRating > 4.2;
               });
-              console.log(filterlist);
-              setlistofRestaurants(filterlist);
+             // console.log(filterlist);
+              setFilteredList(filterlist);
+              setIsRatingActive(current => !current);
+              setIsFastActive(false);
+              setPureVegIsActive(false);
             }}
           >
-            <i className="fa-solid fa-star"></i> Top Rated Restaurants
+            <i className="fa-solid fa-star" style={{color:"green"}}></i> Ratings 4.0+
           </button>
         </div>
       </div>
@@ -127,11 +178,12 @@ const Body = () => {
             key={restaurant?.info?.id}
             className="w-[300px] p-2 mb-2 shadow-lg rounded-md"
           >
-            {restaurant?.info?.avgRating > 4.4 ? (
+            {/*restaurant?.info?.avgRating > 4.4 ? (
               <RestaurantCardOnlyFiveStar resData={restaurant} />
             ) : (
               <RestaurantCard resData={restaurant} />
-            )}
+            )*/}
+            <RestaurantCard resData={restaurant} />
           </Link>
         ))}
       </div>

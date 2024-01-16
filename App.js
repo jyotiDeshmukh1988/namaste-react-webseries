@@ -51,14 +51,14 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <Cart/>,
       },
-      {
+     /* {
         path: "/grocery",
         element: (
           <Suspense fallback={<Shimmer/>}>
             <Grocery />
           </Suspense>
         ),
-      },
+      },*/
       {
         path: "restaurant/:resId", // dynamic routing
         element: <RestaurantMenu />,

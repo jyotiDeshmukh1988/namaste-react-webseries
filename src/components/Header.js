@@ -53,9 +53,9 @@ const Header = () => {
           <li className="px-4">
             <Link to="/contact">Contact</Link>
           </li>
-          <li className="px-4">
+          {/*<li className="px-4">
             <Link to="/grocery">Grocery</Link>
-          </li>
+  </li>*/}
           <li className="px-4">
             {/* use conditional rendering for login and logout */}
             {isUserLogin ? (
